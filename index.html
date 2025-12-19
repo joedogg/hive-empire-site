@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hive Empire - Idle Bee Colony Game</title>
+    <meta name="description" content="Build your bee empire! An addictive idle game where you manage a thriving bee colony, produce honey, and grow your hive to legendary proportions.">
+    <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --honey-gold: #F5A623;
+            --honey-dark: #D4820E;
+            --honey-light: #FFD93D;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-light: #ffffff;
+            --text-muted: #a0a0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 20px;
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(245, 166, 35, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--honey-light) 0%, var(--honey-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .app-store-badge {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .app-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store-badge img {
+            height: 54px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 0 60px;
+            text-align: center;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--honey-gold);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(245, 166, 35, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 166, 35, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--honey-light);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Honey Tiers */
+        .tiers {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .tier-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tier-badge {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(245, 166, 35, 0.1) 100%);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(245, 166, 35, 0.2);
+        }
+
+        /* Support Section */
+        .support {
+            padding: 60px 0;
+            background: var(--bg-card);
+            border-radius: 30px;
+            margin: 40px 0;
+        }
+
+        .support-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .support-content p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .support-email {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--honey-gold) 0%, var(--honey-dark) 100%);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .support-email:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 60px 0;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(245, 166, 35, 0.1);
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            color: var(--honey-light);
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--honey-gold);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            header {
+                padding: 40px 0 30px;
+            }
+
+            .features, .tiers, .faq {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="app-icon.png" alt="Hive Empire App Icon" class="logo">
+            <h1>Hive Empire</h1>
+            <p class="tagline">Build Your Bee Colony. Produce Legendary Honey.</p>
+            <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="app-store-badge">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+            </a>
+        </header>
+
+        <section class="hero">
+            <p class="hero-description">
+                Welcome to Hive Empire, the ultimate idle bee colony management game!
+                Watch your hive grow as busy bees produce honey, unlock rare honey tiers,
+                and build the most legendary bee empire the world has ever seen.
+            </p>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Game Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🐝</div>
+                    <h3>Grow Your Colony</h3>
+                    <p>Tap to spawn bees and watch your colony thrive. Upgrade your hive capacity to house thousands of busy workers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍯</div>
+                    <h3>17 Honey Tiers</h3>
+                    <p>Discover rare honey varieties from humble Clover to the legendary Enlightened Honey worth trillions!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <h3>Prestige System</h3>
+                    <p>Perform Swarm Migrations to earn Royal Jelly and Queen's Blessings for permanent bonuses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>32+ Achievements</h3>
+                    <p>Complete challenges across production, collection, prestige, and mastery categories.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Endless Progression</h3>
+                    <p>Unlock genetic studies, hive relics, and powerful upgrades for infinite scaling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💤</div>
+                    <h3>Idle Earnings</h3>
+                    <p>Your bees never sleep! Earn coins and produce honey even when you're away.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tiers">
+            <h2 class="section-title">Discover Rare Honey</h2>
+            <div class="tier-badges">
+                <span class="tier-badge">🌸 Clover</span>
+                <span class="tier-badge">🌻 Wildflower</span>
+                <span class="tier-badge">🍊 Orange Blossom</span>
+                <span class="tier-badge">🌾 Buckwheat</span>
+                <span class="tier-badge">🌺 Manuka</span>
+                <span class="tier-badge">🌲 Acacia</span>
+                <span class="tier-badge">🍀 Tupelo</span>
+                <span class="tier-badge">🏔️ Sidr</span>
+                <span class="tier-badge">✨ Royal Jelly Infused</span>
+                <span class="tier-badge">💎 Crystallized</span>
+                <span class="tier-badge">🌟 Golden Nectar</span>
+                <span class="tier-badge">🔮 Ethereal</span>
+                <span class="tier-badge">🌌 Cosmic</span>
+                <span class="tier-badge">⚡ Transcendent</span>
+                <span class="tier-badge">👁️ Omniscient</span>
+                <span class="tier-badge">🕳️ Void</span>
+                <span class="tier-badge">💫 Enlightened</span>
+            </div>
+        </section>
+
+        <section class="support">
+            <div class="support-content">
+                <h2 class="section-title">Need Help?</h2>
+                <p>
+                    Having trouble with the game or have a suggestion?
+                    We'd love to hear from you! Our team is here to help
+                    make your Hive Empire experience amazing.
+                </p>
+                <a href="mailto:support@hiveempiregame.com" class="support-email">
+                    Contact Support
+                </a>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I restore my purchases?</h3>
+                <p>Go to Settings in the game and tap "Restore Purchases". Make sure you're signed in with the same Apple ID you used for the original purchase.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I play offline?</h3>
+                <p>Yes! Hive Empire works completely offline. Your bees will continue producing honey and you'll receive your offline earnings when you return.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I prestige / migrate my swarm?</h3>
+                <p>Once you've earned at least 1 million coins in total, the Swarm Migration option becomes available. This resets your colony but grants permanent Royal Jelly bonuses!</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is my progress saved?</h3>
+                <p>Your game auto-saves every 30 seconds. Progress is stored locally on your device. We recommend keeping your device backed up via iCloud.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I unlock new honey tiers?</h3>
+                <p>New honey tiers unlock automatically based on your lifetime earnings. Keep growing your empire to discover all 17 legendary varieties!</p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="mailto:support@hiveempiregame.com">Contact</a>
+            </div>
+            <p class="copyright">&copy; 2025 Hive Empire. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
